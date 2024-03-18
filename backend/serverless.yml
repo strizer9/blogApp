@@ -1,0 +1,21 @@
+service: awsBlog
+frameworkVersion: '3'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  enviorment: 
+    CONNECTION_URL:${env:CONNECTION_URL}
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi: '*'
+    timeout: 30
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+  - serverless-plugin-common-excludes
+  - serverless-plugin-include-dependencies
